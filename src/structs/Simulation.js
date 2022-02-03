@@ -21,6 +21,7 @@ export default class Simulation {
     }
 
     step() {
+        // TODO обернуть тестами, drawer === null
         this.modifyCells();
         this.draw();
 
@@ -28,8 +29,14 @@ export default class Simulation {
     }
 
     draw() {
+        if(!this.drawer) {
+            return this;
+        }
+
         this.drawer.clearField();
         this.map.cells.forEach((cell) => this.drawer.drawCell(cell));
+
+        return this;
     }
 
     modifyCells() {
